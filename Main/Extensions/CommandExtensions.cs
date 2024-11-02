@@ -1,4 +1,7 @@
 ﻿using Commands;
+using Commands.Availability;
+using Factories.Commands;
+using Commands.Search;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Main.Extensions
@@ -8,8 +11,9 @@ namespace Main.Extensions
         public static IServiceCollection AddCommands(this IServiceCollection services)
         {
             return services
-                .AddTransient<ICommand, AvailabilityCommand>()
-                .AddTransient<ICommand, SearchCommand>();
+                .AddTransient<AvailabilityCommand>()
+                .AddTransient<SearchCommand>()
+                .AddSingleton<ICommandFactory, CommandFactory>();
         }
     }
 }

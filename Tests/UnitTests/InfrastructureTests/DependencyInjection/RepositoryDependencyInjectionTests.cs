@@ -20,17 +20,19 @@ namespace InfrastructureTests.DependencyInjection
         }
 
         [TestMethod]
-        public void AddServices_ShouldRegisterBookingRepository()
+        public void AddRepositories_ShouldRegisterBookingRepository()
         {
             var repository = _serviceProvider.GetService<IBookingRepository>();    
             Assert.IsNotNull(repository);
+            Assert.IsTrue(repository is IBookingRepository);
         }
 
         [TestMethod]
-        public void AddServices_ShouldRegisterHotelRepository()
+        public void AddRepositories_ShouldRegisterHotelRepository()
         {
             var repository = _serviceProvider.GetService<IHotelRepository>();
             Assert.IsNotNull(repository);
+            Assert.IsTrue(repository is IHotelRepository);
         }
     }
 }

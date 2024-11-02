@@ -1,4 +1,5 @@
-﻿using Commands;
+﻿using Commands.Availability;
+using Commands.Search;
 using Main.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,17 +20,19 @@ namespace InfrastructureTests.DependencyInjection
         }
 
         [TestMethod]
-        public void AddServices_ShouldRegisterAvailabilityCommand()
+        public void AddCommands_ShouldRegisterAvailabilityCommand()
         {
-            var commands = _serviceProvider.GetServices<ICommand>().ToList();
-            Assert.IsTrue(commands.Any(c => c is AvailabilityCommand));
+            var command = _serviceProvider.GetService<AvailabilityCommand>();
+            Assert.IsNotNull(command);
+            Assert.IsTrue(command is AvailabilityCommand);
         }
 
         [TestMethod]
-        public void AddServices_ShouldRegisterSearchCommand()
+        public void AddCommands_ShouldRegisterSearchCommand()
         {
-            var commands = _serviceProvider.GetServices<ICommand>().ToList();
-            Assert.IsTrue(commands.Any(c => c is SearchCommand));
+            var command = _serviceProvider.GetService<SearchCommand>();
+            Assert.IsNotNull(command);
+            Assert.IsTrue(command is SearchCommand);
         }
     }
 }

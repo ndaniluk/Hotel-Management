@@ -3,7 +3,6 @@ using Services.Availability;
 using Main.Extensions;
 using Services.Search;
 
-
 namespace InfrastructureTests.DependencyInjection
 {
     [TestClass]
@@ -25,6 +24,7 @@ namespace InfrastructureTests.DependencyInjection
         {
             var service = _serviceProvider.GetService<IAvailabilityService>();
             Assert.IsNotNull(service);
+            Assert.IsTrue(service is IAvailabilityService);
         }
 
         [TestMethod]
@@ -32,6 +32,7 @@ namespace InfrastructureTests.DependencyInjection
         {
             var service = _serviceProvider.GetService<ISearchService>();
             Assert.IsNotNull(service);
+            Assert.IsTrue(service is ISearchService);
         }
     }
 }
