@@ -15,19 +15,36 @@ namespace Main
         {
             while (true)
             {
+                Console.WriteLine("Enter command or press Enter to exit:");
                 var input = Console.ReadLine();
-                
-                if (input == string.Empty || input == null) {
-                    Console.WriteLine("Exitting the app...");
-                    return;
-                } else
+
+                if (string.IsNullOrWhiteSpace(input))
                 {
-                    var command = input.Split()[0];
-                    var args = input.Split().Skip(1);
-                    var a = _commandFactory.CreateCommand(command);
-                    a.Execute(args);
+                    Console.WriteLine("Exiting the app...");
+                    return;
+                }
+
+                var inputParts = input.Split();
+                var commandName = inputParts[0];
+                var commandArgs = inputParts.Skip(1).ToArray();
+
+                try
+                {
+                    var command = _commandFactory.CreateCommand(commandName);
+                    command.Execute(commandArgs);
+                }
+                catch (ArgumentException)
+                {
+                    Console.WriteLine($"Error: Command '{commandName}' can't be recognized.");
+                }
+                catch (InvalidOperationException)
+                {
+                    Console.WriteLine($"Error: Command '{commandName}' is recognized but is not properly configured.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"An unexpected error occurred: {ex.Message}");
                 }
             }
         }
-    }
 }

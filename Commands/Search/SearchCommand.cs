@@ -2,7 +2,7 @@
 {
     public class SearchCommand : ICommand
     {
-        public void Execute(IEnumerable<string> args)
+        public void Execute(string[] args)
         {
         }
     }
