@@ -4,11 +4,11 @@ namespace Main
 {
     internal class App
     {
-        private ICommandFactory _commandFactory;
+        private readonly ICommandInvoker _commandInvoker;
 
-        public App(ICommandFactory commandFactory)
+        public App(ICommandInvoker commandInvoker)
         {
-            _commandFactory = commandFactory;
+            _commandInvoker = commandInvoker;
         }
 
         internal void Start()
@@ -28,23 +28,8 @@ namespace Main
                 var commandName = inputParts[0];
                 var commandArgs = inputParts.Skip(1).ToArray();
 
-                try
-                {
-                    var command = _commandFactory.CreateCommand(commandName);
-                    command.Execute(commandArgs);
-                }
-                catch (ArgumentException)
-                {
-                    Console.WriteLine($"Error: Command '{commandName}' can't be recognized.");
-                }
-                catch (InvalidOperationException)
-                {
-                    Console.WriteLine($"Error: Command '{commandName}' is recognized but is not properly configured.");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"An unexpected error occurred: {ex.Message}");
-                }
+                _commandInvoker.Invoke(commandName, commandArgs);
             }
         }
+    }
 }
