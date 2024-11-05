@@ -13,6 +13,7 @@ namespace Main.Extensions
             return services
                 .AddTransient<AvailabilityCommand>()
                 .AddTransient<SearchCommand>()
+                .AddSingleton<ICommandInvoker, CommandInvoker>()
                 .AddSingleton<ICommandFactory, CommandFactory>();
         }
     }

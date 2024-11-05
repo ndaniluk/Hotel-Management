@@ -11,7 +11,7 @@ namespace Factories.Commands
 
         public ICommand CreateCommand(string commandName)
         {
-            return commandName.Split()[0].ToLower() switch
+            return commandName.ToLower() switch
             {
                 "availability" => _serviceProvider.GetRequiredService<AvailabilityCommand>(),
                 "search" => _serviceProvider.GetRequiredService<SearchCommand>(),

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Repositories.Booking;
-using Repositories.Hotel;
+using Repositories.Bookings;
+using Repositories.Hotels;
 
 namespace Main.Extensions
 {
