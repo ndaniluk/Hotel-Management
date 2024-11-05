@@ -2,8 +2,9 @@
 using Repositories.Bookings;
 using Repositories.Hotels;
 using Main.Extensions;
+using Microsoft.Extensions.Configuration;
 
-namespace InfrastructureTests.DependencyInjection
+namespace UnitTests.Infrastructure.DependencyInjection
 {
     [TestClass]
     public class RepositoryDependencyInjectionTests
@@ -14,15 +15,19 @@ namespace InfrastructureTests.DependencyInjection
         [TestInitialize]
         public void InitializeTests()
         {
+            var configuration = new ConfigurationBuilder().Build();
             _serviceCollection = new ServiceCollection();
-            _serviceCollection.AddRepositories();
+            _serviceCollection
+                .AddSingleton<IConfiguration>(configuration)
+                .AddHelpers()
+                .AddRepositories();
             _serviceProvider = _serviceCollection.BuildServiceProvider();
         }
 
         [TestMethod]
         public void AddRepositories_ShouldRegisterBookingRepository()
         {
-            var repository = _serviceProvider.GetService<IBookingRepository>();    
+            var repository = _serviceProvider.GetService<IBookingRepository>();
             Assert.IsNotNull(repository);
             Assert.IsTrue(repository is IBookingRepository);
         }

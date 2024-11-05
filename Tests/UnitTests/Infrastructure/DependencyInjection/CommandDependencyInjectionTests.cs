@@ -3,7 +3,7 @@ using Commands.Search;
 using Main.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace InfrastructureTests.DependencyInjection
+namespace UnitTests.Infrastructure.DependencyInjection
 {
     [TestClass]
     public class CommandDependencyInjectionTests

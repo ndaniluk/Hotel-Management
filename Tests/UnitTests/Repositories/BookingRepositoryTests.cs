@@ -1,4 +1,4 @@
-﻿namespace RepositoriesTests
+﻿namespace UnitTests.Repositories
 {
     public class BookingRepositoryTests
     {

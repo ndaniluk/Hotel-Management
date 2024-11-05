@@ -4,7 +4,7 @@ using Commands.Search;
 using Main.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace InfrastructureTests.Factories
+namespace UnitTests.Infrastructure.Factories
 {
     [TestClass]
     public class CommandFactoryTests
@@ -19,13 +19,13 @@ namespace InfrastructureTests.Factories
             _serviceCollection = new ServiceCollection();
             _serviceCollection.AddCommands();
             _serviceProvider = _serviceCollection.BuildServiceProvider();
-            _commandFactory = _serviceProvider.GetService<ICommandFactory>();
+            _commandFactory = _serviceProvider.GetRequiredService<ICommandFactory>();
         }
 
         [TestMethod]
         public void CreateCommand_ShouldCreateSearchCommand()
         {
-            var command = _commandFactory.CreateCommand("Search arg1 arg2");
+            var command = _commandFactory.CreateCommand("Search");
             Assert.IsNotNull(command);
             Assert.IsTrue(command is SearchCommand);
         }
@@ -33,7 +33,7 @@ namespace InfrastructureTests.Factories
         [TestMethod]
         public void CreateCommand_ShouldCreateAvailabilityCommand()
         {
-            var command = _commandFactory.CreateCommand("Availability arg1 arg2");
+            var command = _commandFactory.CreateCommand("Availability");
             Assert.IsNotNull(command);
             Assert.IsTrue(command is AvailabilityCommand);
         }

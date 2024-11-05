@@ -8,7 +8,7 @@ namespace Main.Extensions
         public static IServiceCollection AddHelpers(this IServiceCollection services)
         {
             return services
-                .AddTransient<IFileReader, FileReader>();
+                .AddSingleton<IFileReader, FileReader>();
         }
     }
 }

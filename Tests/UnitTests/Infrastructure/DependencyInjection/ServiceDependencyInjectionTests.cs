@@ -3,7 +3,7 @@ using Services.Availability;
 using Main.Extensions;
 using Services.Search;
 
-namespace InfrastructureTests.DependencyInjection
+namespace UnitTests.Infrastructure.DependencyInjection
 {
     [TestClass]
     public class ServiceDependencyInjectionTests

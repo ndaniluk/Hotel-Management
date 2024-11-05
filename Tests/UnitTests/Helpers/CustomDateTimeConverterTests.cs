@@ -1,7 +1,7 @@
 ﻿using Helpers.Converters;
 using System.Text.Json;
 
-namespace HelpersTests
+namespace UnitTests.Helpers
 {
     [TestClass]
     public class CustomDateTimeConverterTests

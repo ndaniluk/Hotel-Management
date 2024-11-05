@@ -2,7 +2,7 @@
 using Main.Extensions;
 using Helpers.FileOperations;
 
-namespace InfrastructureTests.DependencyInjection
+namespace UnitTests.Infrastructure.DependencyInjection
 {
     [TestClass]
     public class HelperDependencyInjectionTests
