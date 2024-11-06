@@ -8,15 +8,14 @@ namespace UnitTests.Infrastructure.DependencyInjection
     [TestClass]
     public class ServiceDependencyInjectionTests
     {
-        private IServiceCollection _serviceCollection;
         private IServiceProvider _serviceProvider;
 
         [TestInitialize]
         public void InitializeTests()
         {
-            _serviceCollection = new ServiceCollection();
-            _serviceCollection.AddServices();
-            _serviceProvider = _serviceCollection.BuildServiceProvider();
+            var serviceCollection = new ServiceCollection();
+            serviceCollection.AddServices();
+            _serviceProvider = serviceCollection.BuildServiceProvider();
         }
 
         [TestMethod]

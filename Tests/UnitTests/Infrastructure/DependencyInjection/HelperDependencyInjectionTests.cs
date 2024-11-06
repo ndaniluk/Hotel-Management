@@ -7,15 +7,14 @@ namespace UnitTests.Infrastructure.DependencyInjection
     [TestClass]
     public class HelperDependencyInjectionTests
     {
-        private IServiceCollection _serviceCollection;
         private IServiceProvider _serviceProvider;
 
         [TestInitialize]
         public void InitializeTests()
         {
-            _serviceCollection = new ServiceCollection();
-            _serviceCollection.AddHelpers();
-            _serviceProvider = _serviceCollection.BuildServiceProvider();
+            var serviceCollection = new ServiceCollection();
+            serviceCollection.AddHelpers();
+            _serviceProvider = serviceCollection.BuildServiceProvider();
         }
 
         [TestMethod]
