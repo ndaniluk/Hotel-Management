@@ -4,12 +4,8 @@ using Models;
 
 namespace Repositories.Bookings
 {
-    public class BookingRepository : BaseRepository<Booking>, IBookingRepository
+    public class BookingRepository(IConfiguration configuration, IFileReader fileReader) : BaseRepository<Booking>(configuration, fileReader), IBookingRepository
     {
-        public BookingRepository(IConfiguration configuration, IFileReader fileReader) : base(configuration, fileReader)
-        {
-        }
-
         public override Booking? GetById(string id)
         {
             return GetAllFromFile().FirstOrDefault(b => b.HotelId == id);

@@ -3,13 +3,10 @@ using System.Text.Json.Serialization;
 
 namespace Helpers.Converters
 {
-    public class CustomDateTimeConverter : JsonConverter<DateTime>
+    public class CustomDateTimeConverter(string dateFormat) : JsonConverter<DateTime>
     {
-        private readonly string _dateFormat;
-        public CustomDateTimeConverter(string dateFormat)
-        {
-            _dateFormat = dateFormat;
-        }
+        private readonly string _dateFormat = dateFormat;
+
         public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             if (reader.TokenType != JsonTokenType.String)

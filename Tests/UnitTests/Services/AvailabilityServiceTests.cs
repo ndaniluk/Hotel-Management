@@ -1,4 +1,4 @@
-﻿using Helpers.FileOperations;
+﻿    using Helpers.FileOperations;
 using Main.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -73,22 +73,21 @@ namespace UnitTests.Services
         {
             string[][] inputs =
                 [
-                    ["H1", "20240901", "20240902", "SGL"],
-                    ["H1", "20240902", "20240905", "SGL"],
-                    ["H3", "20240905", "20240907", "DBL"],
-                    ["H2", "20240910", "20240911", "DEL"],
-                    ["H3", "20240920", "20240925", "STE"],
-                    ["H1", "20240902", "20240903", "DBL"]
+                    ["H1", "20240901-20240902", "SGL"],
+                    ["H1", "20240902-20240905", "SGL"],
+                    ["H3", "20240905-20240907", "DBL"],
+                    ["H2", "20240910-20240911", "DEL"],
+                    ["H3", "20240920-20240925", "STE"],
+                    ["H1", "20240902-20240903", "DBL"]
                 ];
             var results = new int[6];
 
             for (int i = 0; i < inputs.Length; i++)
             {
                 var hotelId = inputs[i][0];
-                var dateFrom = inputs[i][1];
-                var dateTo = inputs[i][2];
-                var roomType = inputs[i][3];
-                results[i] = _availabilityService.GetRoomAvailability(hotelId, dateFrom, dateTo, roomType);
+                var dates = inputs[i][1];
+                var roomType = inputs[i][2];
+                results[i] = _availabilityService.GetRoomAvailability(hotelId, dates, roomType);
             }
 
             Assert.AreEqual(1, results[0]);

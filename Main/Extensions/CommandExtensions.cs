@@ -1,5 +1,4 @@
-﻿using Commands;
-using Commands.Availability;
+﻿using Commands.Availability;
 using Factories.Commands;
 using Commands.Search;
 using Microsoft.Extensions.DependencyInjection;

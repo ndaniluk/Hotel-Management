@@ -6,20 +6,25 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Services.Availability
 {
-    public class AvailabilityService : IAvailabilityService
+    public class AvailabilityService(IConfiguration configuration, IBookingRepository bookingRepository, IHotelRepository hotelRepository) : IAvailabilityService
     {
-        private readonly IConfiguration _configuration;
-        private readonly IBookingRepository _bookingRepository;
-        private readonly IHotelRepository _hotelRepository;
+        private readonly IConfiguration _configuration = configuration;
+        private readonly IBookingRepository _bookingRepository = bookingRepository;
+        private readonly IHotelRepository _hotelRepository = hotelRepository;
 
-        public AvailabilityService(IConfiguration configuration, IBookingRepository bookingRepository, IHotelRepository hotelRepository)
+        public int GetRoomAvailability(string hotelId, string dates, string roomType)
         {
-            _configuration = configuration;
-            _bookingRepository = bookingRepository;
-            _hotelRepository = hotelRepository;
+            if (dates.Contains('-'))
+            {
+                var datesRange = dates.Split('-');
+                return GetRoomAvailabilityForDateRange(hotelId, datesRange[0], datesRange[1], roomType);
+            } else
+            {
+                return GetRoomAvailabilityForSingleDate(hotelId, dates, roomType);
+            }
         }
 
-        public int GetRoomAvailability(string hotelId, string date, string roomType)
+        private int GetRoomAvailabilityForSingleDate(string hotelId, string date, string roomType)
         {
             var roomsCount = GetRoomsCount(hotelId, roomType);
             if (roomsCount == 0)
@@ -42,14 +47,14 @@ namespace Services.Availability
 
             var bookingsForDate = bookings
                 .Where(b => 
-                    (b.Arrival <= parsedDate && b.Departure >= parsedDate) && 
+                    b.Arrival <= parsedDate && b.Departure >= parsedDate && 
                     b.HotelId == hotelId && b.RoomType == roomType)
                 .Count();
 
             return roomsCount - bookingsForDate;
         }
 
-        public int GetRoomAvailability(string hotelId, string dateFrom, string dateTo, string roomType)
+        private int GetRoomAvailabilityForDateRange(string hotelId, string dateFrom, string dateTo, string roomType)
         {
             var roomsCount = GetRoomsCount(hotelId, roomType);
             if (roomsCount == 0)
@@ -70,6 +75,12 @@ namespace Services.Availability
             catch (FormatException)
             {
                 Console.WriteLine("Invalid date format.");
+                return 0;
+            }
+
+            if (parsedDateFrom > parsedDateTo)
+            {
+                Console.WriteLine("Invalid dates provided");
                 return 0;
             }
 

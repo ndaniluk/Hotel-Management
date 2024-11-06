@@ -1,13 +1,8 @@
 ﻿namespace Factories.Commands
 {
-    public  class CommandInvoker : ICommandInvoker
+    public  class CommandInvoker(ICommandFactory commandFactory) : ICommandInvoker
     {
-        private readonly ICommandFactory _commandFactory;
-
-        public CommandInvoker(ICommandFactory commandFactory)
-        {
-            _commandFactory = commandFactory;
-        }
+        private readonly ICommandFactory _commandFactory = commandFactory;
 
         public void Invoke(string commandName, string[] commandArgs)
         {
