@@ -14,10 +14,5 @@ namespace Repositories.Hotels
         {
             return GetAllFromFile().FirstOrDefault(h => h.Id == id);
         }
-
-        public override IEnumerable<Hotel> GetAll()
-        {
-            return GetAllFromFile();
-        }
     }
 }

@@ -5,23 +5,20 @@ using Helpers.Converters;
 
 namespace Repositories
 {
-    public abstract class BaseRepository<T> : IRepository<T>
+    public abstract class BaseRepository<T>(IConfiguration configuration, IFileReader reader) : IRepository<T>
     {
-        private readonly IConfiguration _configuration;
-        private readonly IFileReader _reader;
-
-        public BaseRepository(IConfiguration configuration, IFileReader reader)
-        {
-            _configuration = configuration;
-            _reader = reader;
-        }
+        private readonly IConfiguration _configuration = configuration;
+        private readonly IFileReader _reader = reader;
 
         public abstract T? GetById(string id);
-        public abstract IEnumerable<T> GetAll();
+        public virtual IEnumerable<T> GetAll()
+        {
+            return GetAllFromFile();
+        }
 
         public IEnumerable<T> GetAllFromFile()
         {
-            var fileName = _configuration.GetSection("Repositories").GetSection(typeof(T).Name).Value;
+            var fileName = _configuration.GetSection("Repositories").GetSection(nameof(T)).Value;
             if (string.IsNullOrEmpty(fileName))
             {
                 return Enumerable.Empty<T>();
