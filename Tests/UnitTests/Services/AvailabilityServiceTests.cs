@@ -1,4 +1,4 @@
-﻿    using Helpers.FileOperations;
+﻿using Helpers.FileOperations;
 using Main.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -53,7 +53,7 @@ namespace UnitTests.Services
             var results = new int[6];
 
             for (int i = 0; i < inputs.Length; i++)
-            {   
+            {
                 var hotelId = inputs[i][0];
                 var date = inputs[i][1];
                 var roomType = inputs[i][2];
