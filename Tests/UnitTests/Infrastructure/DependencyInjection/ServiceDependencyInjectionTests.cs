@@ -2,6 +2,7 @@
 using Services.Availability;
 using Main.Extensions;
 using Services.Search;
+using Microsoft.Extensions.Configuration;
 
 namespace UnitTests.Infrastructure.DependencyInjection
 {
@@ -13,8 +14,13 @@ namespace UnitTests.Infrastructure.DependencyInjection
         [TestInitialize]
         public void InitializeTests()
         {
+            var configuration = new ConfigurationBuilder().Build();
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddServices();
+            serviceCollection
+                .AddSingleton<IConfiguration>(configuration)
+                .AddServices()
+                .AddRepositories()
+                .AddHelpers();
             _serviceProvider = serviceCollection.BuildServiceProvider();
         }
 

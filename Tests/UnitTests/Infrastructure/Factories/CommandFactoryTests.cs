@@ -3,23 +3,28 @@ using Factories.Commands;
 using Commands.Search;
 using Main.Extensions;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
 
 namespace UnitTests.Infrastructure.Factories
 {
     [TestClass]
     public class CommandFactoryTests
     {
-        private IServiceCollection _serviceCollection;
-        private IServiceProvider _serviceProvider;
         private ICommandFactory _commandFactory;
 
         [TestInitialize]
         public void InitializeTests()
         {
-            _serviceCollection = new ServiceCollection();
-            _serviceCollection.AddCommands();
-            _serviceProvider = _serviceCollection.BuildServiceProvider();
-            _commandFactory = _serviceProvider.GetRequiredService<ICommandFactory>();
+            var configuration = new ConfigurationBuilder().Build();
+            var serviceCollection = new ServiceCollection();
+            serviceCollection
+                .AddSingleton<IConfiguration>(configuration)
+                .AddServices()
+                .AddCommands()
+                .AddRepositories()
+                .AddHelpers();
+            var serviceProvider = serviceCollection.BuildServiceProvider();
+            _commandFactory = serviceProvider.GetRequiredService<ICommandFactory>();
         }
 
         [TestMethod]

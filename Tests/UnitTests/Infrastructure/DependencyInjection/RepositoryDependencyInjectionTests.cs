@@ -9,19 +9,18 @@ namespace UnitTests.Infrastructure.DependencyInjection
     [TestClass]
     public class RepositoryDependencyInjectionTests
     {
-        private IServiceCollection _serviceCollection;
         private IServiceProvider _serviceProvider;
 
         [TestInitialize]
         public void InitializeTests()
         {
             var configuration = new ConfigurationBuilder().Build();
-            _serviceCollection = new ServiceCollection();
-            _serviceCollection
+            var serviceCollection = new ServiceCollection();
+            serviceCollection
                 .AddSingleton<IConfiguration>(configuration)
                 .AddHelpers()
                 .AddRepositories();
-            _serviceProvider = _serviceCollection.BuildServiceProvider();
+            _serviceProvider = serviceCollection.BuildServiceProvider();
         }
 
         [TestMethod]
