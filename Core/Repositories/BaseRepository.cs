@@ -18,20 +18,23 @@ namespace Repositories
 
         public IEnumerable<T> GetAllFromFile()
         {
-            var fileName = _configuration.GetSection("Repositories").GetSection(nameof(T)).Value;
+            var fileName = _configuration.GetSection("Repositories").GetSection(typeof(T).Name).Value;
             if (string.IsNullOrEmpty(fileName))
             {
+                Console.WriteLine("Couldn't connect with the data provider");
                 return Enumerable.Empty<T>();
             }
 
             try
             {
+                var dateFormat = _configuration.GetRequiredSection("DateFormat").Value ?? "";
                 var file = _reader.Read(fileName);
                 var options = new JsonSerializerOptions
                 {
                     PropertyNameCaseInsensitive = true,
-                    Converters = { new CustomDateTimeConverter("yyyyMMdd") }
+                    Converters = { new CustomDateTimeConverter(dateFormat) }
                 };
+
                 var data = JsonSerializer.Deserialize<IEnumerable<T>>(file, options);
                 return data ?? Enumerable.Empty<T>();
             }

@@ -18,11 +18,11 @@
             }
             catch (ArgumentException)
             {
-                Console.WriteLine($"Error: Command '{commandName}' can't be recognized.");
+                Console.WriteLine($"Command '{commandName}' can't be recognized.");
             }
             catch (InvalidOperationException)
             {
-                Console.WriteLine($"Error: Command '{commandName}' is recognized but is not properly configured.");
+                Console.WriteLine($"Command '{commandName}' is recognized but is not properly configured.");
             }
             catch (Exception ex)
             {
