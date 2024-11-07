@@ -29,11 +29,7 @@ namespace Main
                     return;
                 }
 
-                var inputParts = input.Split();
-                var commandName = inputParts[0];
-                var commandArgs = inputParts.Skip(1).ToArray();
-
-                _commandInvoker.Invoke(commandName, commandArgs);
+                _commandInvoker.Invoke(input);
             }
         }
     }

@@ -10,7 +10,6 @@ namespace Repositories
         private readonly IConfiguration _configuration = configuration;
         private readonly IFileReader _reader = reader;
 
-        public abstract T? GetById(string id);
         public virtual IEnumerable<T> GetAll()
         {
             return GetAllFromFile();

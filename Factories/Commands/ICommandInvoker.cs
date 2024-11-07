@@ -2,6 +2,6 @@
 {
     public interface ICommandInvoker
     {
-        void Invoke(string commandName, string[] commandArgs);  
+        void Invoke(string input);  
     }
 }

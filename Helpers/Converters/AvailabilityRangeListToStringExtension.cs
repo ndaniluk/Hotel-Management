@@ -4,7 +4,7 @@ namespace Helpers.Converters
 {
     public static class AvailabilityRangeListToStringExtension
     {
-        public static string ToOutputString(this IEnumerable<AvailabilityRange> availabilityRanges)
+        public static string ToOutputString(this IEnumerable<AvailabilityRange> availabilityRanges, string dateFormat)
         {
             if (availabilityRanges == null)
             {
@@ -12,16 +12,24 @@ namespace Helpers.Converters
             }
 
             var results = new List<string>();
-            foreach (var availabilityRange in availabilityRanges)
+            try
             {
-                if (availabilityRange.DateFrom == availabilityRange.DateTo)
+                foreach (var availabilityRange in availabilityRanges)
                 {
-                    results.Add($"({availabilityRange.DateFrom:yyyyMMdd}, {availabilityRange.RoomAvailability})");
+                    if (availabilityRange.DateFrom == availabilityRange.DateTo)
+                    {
+                        results.Add($"({availabilityRange.DateFrom.ToString(dateFormat)}, {availabilityRange.RoomAvailability})");
+                    }
+                    else
+                    {
+                        results.Add($"({availabilityRange.DateFrom.ToString(dateFormat)}-{availabilityRange.DateTo.ToString(dateFormat)}, {availabilityRange.RoomAvailability})");
+                    }
                 }
-                else
-                {
-                    results.Add($"({availabilityRange.DateFrom:yyyyMMdd}-{availabilityRange.DateTo:yyyyMMdd}, {availabilityRange.RoomAvailability})");
-                }
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid date format.");
+                return string.Empty;
             }
 
             return string.Join(", ", results);
