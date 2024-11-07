@@ -1,7 +1,10 @@
-﻿namespace Services.Availability
+﻿using Models;
+
+namespace Services.Availability
 {
     public interface IAvailabilityService
     {
-        int GetRoomAvailability(string hotelId, string dates, string roomType);
+        int GetRoomAvailabilityForSpecifiedDateRange(string hotelId, string dates, string roomType);
+        IEnumerable<AvailabilityRange> GetRoomAvailabilityForFollowingDays(string hotelId, int days, string roomType);
     }
 }

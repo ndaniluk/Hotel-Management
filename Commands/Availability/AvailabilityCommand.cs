@@ -12,7 +12,7 @@ namespace Commands.Availability
             var dates = args[1];
             var roomType = args[2];
 
-            var availabilityCount = _availabilityService.GetRoomAvailability(hotelId, dates, roomType);
+            var availabilityCount = _availabilityService.GetRoomAvailabilityForSpecifiedDateRange(hotelId, dates, roomType);
             Console.WriteLine($"Available rooms for the specified date: {availabilityCount}");
         }
     }

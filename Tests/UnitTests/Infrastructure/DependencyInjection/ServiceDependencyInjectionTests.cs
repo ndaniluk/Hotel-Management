@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Services.Availability;
 using Main.Extensions;
-using Services.Search;
 using Microsoft.Extensions.Configuration;
 
 namespace UnitTests.Infrastructure.DependencyInjection
@@ -30,14 +29,6 @@ namespace UnitTests.Infrastructure.DependencyInjection
             var service = _serviceProvider.GetService<IAvailabilityService>();
             Assert.IsNotNull(service);
             Assert.IsTrue(service is IAvailabilityService);
-        }
-
-        [TestMethod]
-        public void AddServices_ShouldRegisterSearchService()
-        {
-            var service = _serviceProvider.GetService<ISearchService>();
-            Assert.IsNotNull(service);
-            Assert.IsTrue(service is ISearchService);
         }
     }
 }

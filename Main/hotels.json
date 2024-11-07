@@ -34,5 +34,73 @@
         "roomId": "202"
       }
     ]
+  },
+  {
+    "id": "H2",
+    "name": "Grand Hotel",
+    "roomTypes": [
+      {
+        "code": "SGL",
+        "description": "Single Room",
+        "amenities": [ "WiFi", "TV" ],
+        "features": [ "Non-smoking" ]
+      },
+      {
+        "code": "DEL",
+        "description": "Deluxe Room",
+        "amenities": [ "WiFi", "TV", "Minibar", "Balcony" ],
+        "features": [ "Non-smoking", "City View" ]
+      }
+    ],
+    "rooms": [
+      {
+        "roomType": "SGL",
+        "roomId": "301"
+      },
+      {
+        "roomType": "DEL",
+        "roomId": "401"
+      },
+      {
+        "roomType": "DEL",
+        "roomId": "402"
+      }
+    ]
+  },
+  {
+    "id": "H3",
+    "name": "Beach Resort",
+    "roomTypes": [
+      {
+        "code": "DBL",
+        "description": "Double Room",
+        "amenities": [ "WiFi", "TV", "Minibar" ],
+        "features": [ "Non-smoking", "Sea View" ]
+      },
+      {
+        "code": "STE",
+        "description": "Suite",
+        "amenities": [ "WiFi", "TV", "Minibar", "Jacuzzi" ],
+        "features": [ "Non-smoking", "Ocean View" ]
+      }
+    ],
+    "rooms": [
+      {
+        "roomType": "DBL",
+        "roomId": "501"
+      },
+      {
+        "roomType": "DBL",
+        "roomId": "502"
+      },
+      {
+        "roomType": "STE",
+        "roomId": "601"
+      },
+      {
+        "roomType": "STE",
+        "roomId": "602"
+      }
+    ]
   }
 ]
