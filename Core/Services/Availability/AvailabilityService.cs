@@ -20,15 +20,16 @@ namespace Services.Availability
             return GetRoomAvailabilityForSpecifiedDateRange(hotelId, roomType, dateFrom, dateTo);
         }
 
-        public IEnumerable<AvailabilityRange> GetRoomAvailabilityForFollowingDays(string hotelId, int days, string roomType)
+        public IEnumerable<AvailabilityRange> GetRoomAvailabilityForFollowingDays(string hotelId, int days, string roomType, DateTime startDate = default)
         {
             var roomsCount = GetRoomsCount(hotelId, roomType);
             if (roomsCount == 0)
             {
                 return [];
             }
+
             var bookings = _bookingRepository.GetAll().Where(b => b.HotelId == hotelId && b.RoomType == roomType).OrderBy(b => b.Arrival).ThenBy(b => b.Departure);
-            var startDate = GetDate("20240901");
+            startDate = startDate == default ? DateTime.Now.Date : startDate.Date;
 
             var bookingChangesForFollowingDays = new List<KeyValuePair<DateTime, int>>();
             for (var day = startDate; day <= startDate.AddDays(days); day = day.AddDays(1))

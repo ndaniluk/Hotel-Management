@@ -156,7 +156,7 @@ namespace UnitTests.Services
                 var numberOfDays = int.Parse(inputs[inputIndex][1]);
                 var roomType = inputs[inputIndex][2];
 
-                var actualResults = _availabilityService.GetRoomAvailabilityForFollowingDays(hotelId, numberOfDays, roomType);
+                var actualResults = _availabilityService.GetRoomAvailabilityForFollowingDays(hotelId, numberOfDays, roomType, DateTime.ParseExact("20240901", "yyyyMMdd", null));
 
                 for (var resultIndex = 0; resultIndex < expectedResults[inputIndex].Count; resultIndex++)
                 {
