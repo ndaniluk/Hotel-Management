@@ -1,10 +1,12 @@
-﻿namespace Services.Search
+﻿using Models;
+
+namespace Services.Search
 {
     public class SearchService : ISearchService
     {
-        public string GetRoomAvailabilityDateRanges(string hotelId, string days, string roomType)
+        public IEnumerable<AvailabilityRange> GetRoomAvailabilityDateRanges(string hotelId, int days, string roomType)
         {
-            throw new NotImplementedException();   
+            return new List<AvailabilityRange>();
         }
     }
 }

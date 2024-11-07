@@ -2,6 +2,7 @@
 using Main.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Models;
 using Services.Search;
 using UnitTests.Mocks;
 
@@ -38,35 +39,73 @@ namespace UnitTests.Services
             _searchService = serviceProvider.GetRequiredService<ISearchService>();
         }
 
-    //    [TestMethod]
-    //    public void Search_ShouldReturnAvailableBookingsWithinFollowingDays()
-    //    {
-    //        string[][] inputs =
-    //            [
-    //                ["H1", "365", "SGL"],
-    //                ["H1", "30", "SGL"],
-    //                ["H2", "12", "SGL"],
-    //                ["H3", "22", "STE"],
-    //                ["H2", "50", "DEL"],
-    //                ["H1", "150", "DBL"]
-    //            ];
-    //        var results = new int[6];
+        [TestMethod]
+        public void Search_ShouldReturnAvailableBookingsWithinFollowingDays()
+        {
+            string[][] inputs =
+            [
+                ["H1", "30", "SGL"],
+                [ "H1", "10", "DBL" ],
+                [ "H2", "20", "DEL" ],
+                [ "H2", "15", "SGL" ],
+                [ "H3", "25", "DBL" ],
+                [ "H3", "50", "STE" ]
+            ];
 
-    //        for (int i = 0; i < inputs.Length; i++)
-    //        {
-    //            var hotelId = inputs[i][0];
-    //            var date = inputs[i][1];
-    //            var roomType = inputs[i][2];
-    //            results[i] = _searchService.Get(hotelId, date, roomType);
-    //        }
+            var expectedResults = new List<List<AvailabilityRange>>
+            {
+                new ()
+                {
+                    new (DateTime.ParseExact("20240901", "yyyyMMdd", null), DateTime.ParseExact("20240901", "yyyyMMdd", null), 2),
+                    new (DateTime.ParseExact("20240902", "yyyyMMdd", null), DateTime.ParseExact("20240905", "yyyyMMdd", null), 1),
+                    new (DateTime.ParseExact("20240906", "yyyyMMdd", null), DateTime.ParseExact("20240930", "yyyyMMdd", null), 2)
+                },
+                new ()
+                {
+                    new (DateTime.ParseExact("20240901", "yyyyMMdd", null), DateTime.ParseExact("20240901", "yyyyMMdd", null), 1),
+                    new (DateTime.ParseExact("20240905", "yyyyMMdd", null), DateTime.ParseExact("20240910", "yyyyMMdd", null), 2)
+                },
+                new ()
+                {
+                    new (DateTime.ParseExact("20240901", "yyyyMMdd", null), DateTime.ParseExact("20240909", "yyyyMMdd", null), 2),
+                    new (DateTime.ParseExact("20240910", "yyyyMMdd", null), DateTime.ParseExact("20240912", "yyyyMMdd", null), 1),
+                    new (DateTime.ParseExact("20240913", "yyyyMMdd", null), DateTime.ParseExact("20240920", "yyyyMMdd", null), 2)
+                },
+                new ()
+                {
+                    new (DateTime.ParseExact("20240901", "yyyyMMdd", null), DateTime.ParseExact("20240914", "yyyyMMdd", null), 1)
+                },
+                new ()
+                {
+                    new (DateTime.ParseExact("20240901", "yyyyMMdd", null), DateTime.ParseExact("20240904", "yyyyMMdd", null), 2),
+                    new (DateTime.ParseExact("20240905", "yyyyMMdd", null), DateTime.ParseExact("20240907", "yyyyMMdd", null), 1),
+                    new (DateTime.ParseExact("20240908", "yyyyMMdd", null), DateTime.ParseExact("20240924", "yyyyMMdd", null), 2)
+                },
+                new() {
+                    new (DateTime.ParseExact("20240901", "yyyyMMdd", null), DateTime.ParseExact("20240907", "yyyyMMdd", null), 2),
+                    new (DateTime.ParseExact("20240908", "yyyyMMdd", null), DateTime.ParseExact("20240912", "yyyyMMdd", null), 1),
+                    new (DateTime.ParseExact("20240913", "yyyyMMdd", null), DateTime.ParseExact("20240919", "yyyyMMdd", null), 2),
+                    new (DateTime.ParseExact("20240920", "yyyyMMdd", null), DateTime.ParseExact("20240925", "yyyyMMdd", null), 1),
+                    new (DateTime.ParseExact("20240926", "yyyyMMdd", null), DateTime.ParseExact("20241020", "yyyyMMdd", null), 2)
+                }
+            };
 
-    //        Assert.AreEqual(2, results[0]);
-    //        Assert.AreEqual(1, results[1]);
-    //        Assert.AreEqual(0, results[2]);
-    //        Assert.AreEqual(1, results[3]);
-    //        Assert.AreEqual(1, results[4]);
-    //        Assert.AreEqual(-1, results[5]);
-    //    }
-    //}
+            for (var inputIndex = 0; inputIndex < inputs.Length; inputIndex++)
+            {
+                var hotelId = inputs[inputIndex][0];
+                var numberOfDays = int.Parse(inputs[inputIndex][1]);
+                var roomType = inputs[inputIndex][2];
+
+                var actualResults = _searchService.GetRoomAvailabilityDateRanges(hotelId, numberOfDays, roomType);
+
+                for (var resultIndex = 0; resultIndex < expectedResults.Count; resultIndex++)
+                {
+                    Assert.AreEqual(expectedResults[inputIndex][resultIndex].DateFrom, actualResults.ElementAt(resultIndex).DateFrom);
+                    Assert.AreEqual(expectedResults[inputIndex][resultIndex].DateTo, actualResults.ElementAt(resultIndex).DateTo);
+                    Assert.AreEqual(expectedResults[inputIndex][resultIndex].RoomAvailability, actualResults.ElementAt(resultIndex).RoomAvailability);
+                }
+            }
+        }
     }
 }
+

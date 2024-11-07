@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace Helpers.Converters
 {
-    public class CustomDateTimeConverter(string dateFormat) : JsonConverter<DateTime>
+    public class CustomJsonDateTimeConverter(string dateFormat) : JsonConverter<DateTime>
     {
         private readonly string _dateFormat = dateFormat;
 

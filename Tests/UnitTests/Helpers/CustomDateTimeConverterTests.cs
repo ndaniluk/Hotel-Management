@@ -13,7 +13,7 @@ namespace UnitTests.Helpers
         {
             var options = new JsonSerializerOptions
             {
-                Converters = { new CustomDateTimeConverter("yyyyMMdd") }
+                Converters = { new CustomJsonDateTimeConverter("yyyyMMdd") }
             };
 
             var data = JsonSerializer.Deserialize<List<DateTime>>(_dateTimeString, options);

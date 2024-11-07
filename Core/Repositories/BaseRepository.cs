@@ -32,7 +32,7 @@ namespace Repositories
                 var options = new JsonSerializerOptions
                 {
                     PropertyNameCaseInsensitive = true,
-                    Converters = { new CustomDateTimeConverter(dateFormat) }
+                    Converters = { new CustomJsonDateTimeConverter(dateFormat) }
                 };
 
                 var data = JsonSerializer.Deserialize<IEnumerable<T>>(file, options);
