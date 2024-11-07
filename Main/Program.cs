@@ -5,8 +5,18 @@ using Microsoft.Extensions.DependencyInjection;
 
 var configuration = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
+    .AddCommandLine(args)
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     .Build();
+
+string hotelsFile = configuration["hotels"];
+string bookingsFile = configuration["bookings"];
+
+if (string.IsNullOrEmpty(hotelsFile) || string.IsNullOrEmpty(bookingsFile))
+{
+    Console.WriteLine("Error: Missing data files for hotels or bookings.");
+    return;
+}   
 
 var serviceProvider = new ServiceCollection()
     .AddServices()

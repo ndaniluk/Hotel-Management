@@ -19,7 +19,7 @@ namespace Commands.Search
 
                 var availabilityCount = _availabilityService.GetRoomAvailabilityForFollowingDays(hotelId, days, roomType);
 
-                var dateFormat = _configuration.GetRequiredSection("DateFormat").Value;
+                var dateFormat = _configuration.GetRequiredSection("dateFormat").Value;
                 Console.WriteLine(availabilityCount.ToOutputString(dateFormat));
             } else
             {

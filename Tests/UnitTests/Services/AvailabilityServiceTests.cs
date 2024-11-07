@@ -18,9 +18,9 @@ namespace UnitTests.Services
         {
             var inMemorySettings = new Dictionary<string, string?>
         {
-            { "Repositories:Hotel", "hotels.json" },
-            { "Repositories:Booking", "bookings.json" },
-            { "DateFormat", "yyyyMMdd" }
+            { "hotels", "hotels.json" },
+            { "bookings", "bookings.json" },
+            { "dateFormat", "yyyyMMdd" }
         };
             var configuration = new ConfigurationBuilder()
                 .AddInMemoryCollection(inMemorySettings)

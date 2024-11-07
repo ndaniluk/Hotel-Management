@@ -110,7 +110,7 @@ namespace Services.Availability
 
         private DateTime GetDate(string date)
         {
-            var dateFormat = _configuration.GetRequiredSection("DateFormat").Value ?? "";
+            var dateFormat = _configuration.GetRequiredSection("dateFormat").Value ?? "";
             return DateTime.ParseExact(date, dateFormat, CultureInfo.InvariantCulture);
         }
 

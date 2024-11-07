@@ -18,8 +18,6 @@ namespace Main
         {
             while (true)
             {
-                var hotels = _configuration.GetSection("Repositories").GetSection("Hotels").Value;
-                Console.WriteLine(hotels);
                 Console.WriteLine("Enter command or press Enter to exit:");
                 var input = Console.ReadLine();
 
