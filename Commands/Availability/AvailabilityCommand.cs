@@ -8,12 +8,18 @@ namespace Commands.Availability
 
         public void Execute(string[] args)
         {
-            var hotelId = args[0];
-            var dates = args[1];
-            var roomType = args[2];
+            if (args.Length == 3)
+            {
+                var hotelId = args[0].ToUpper();
+                var dates = args[1];
+                var roomType = args[2].ToUpper();
 
-            var availabilityCount = _availabilityService.GetRoomAvailabilityForSpecifiedDateRange(hotelId, dates, roomType);
-            Console.WriteLine($"Available rooms for the specified date: {availabilityCount}");
+                var availabilityCount = _availabilityService.GetRoomAvailabilityForSpecifiedDateRange(hotelId, dates, roomType);
+                Console.WriteLine($"Available rooms for the specified date: {availabilityCount}");
+            } else
+            {
+                Console.WriteLine("Invalid parameters provided");
+            }
         }
     }
 }

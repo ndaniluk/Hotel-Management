@@ -6,7 +6,7 @@ namespace Helpers.Converters
     {
         public static string ToOutputString(this IEnumerable<AvailabilityRange> availabilityRanges, string dateFormat)
         {
-            if (availabilityRanges == null)
+            if (availabilityRanges == null || availabilityRanges.Count() == 0)
             {
                 return string.Empty;
             }

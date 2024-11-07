@@ -28,14 +28,14 @@ namespace Services.Availability
                 return [];
             }
 
-            var bookings = _bookingRepository.GetAll().Where(b => b.HotelId == hotelId && b.RoomType == roomType).OrderBy(b => b.Arrival).ThenBy(b => b.Departure);
+            var bookings = _bookingRepository.GetAll().Where(b => b.HotelId.Equals(hotelId, StringComparison.OrdinalIgnoreCase) && b.RoomType.Equals(roomType, StringComparison.OrdinalIgnoreCase)).OrderBy(b => b.Arrival).ThenBy(b => b.Departure);
             startDate = startDate == default ? DateTime.Now.Date : startDate.Date;
 
             var bookingChangesForFollowingDays = new List<KeyValuePair<DateTime, int>>();
             for (var day = startDate; day <= startDate.AddDays(days); day = day.AddDays(1))
             {
                 var bookingsForDate = bookings
-                    .Where(b => b.HotelId == hotelId && b.RoomType == roomType && IsBookingOverlapping(b, day))
+                    .Where(b => b.HotelId.Equals(hotelId, StringComparison.OrdinalIgnoreCase) && b.RoomType.Equals(roomType, StringComparison.OrdinalIgnoreCase) && IsBookingOverlapping(b, day))
                     .Count();
                 var availableRooms = roomsCount - bookingsForDate;
                 if (bookingChangesForFollowingDays.Count == 0 || availableRooms != bookingChangesForFollowingDays.Last().Value)
@@ -91,7 +91,7 @@ namespace Services.Availability
             var bookings = _bookingRepository.GetAll();
 
             var bookingsForDate = bookings
-                .Where(b => b.HotelId == hotelId && b.RoomType == roomType && IsBookingOverlapping(b, parsedDateFrom, parsedDateTo))
+                .Where(b => b.HotelId.Equals(hotelId, StringComparison.OrdinalIgnoreCase) && b.RoomType.Equals(roomType, StringComparison.OrdinalIgnoreCase) && IsBookingOverlapping(b, parsedDateFrom, parsedDateTo))
                 .Count();
 
             return roomsCount - bookingsForDate;
@@ -118,7 +118,7 @@ namespace Services.Availability
         private int GetRoomsCount(string hotelId, string roomType)
         {
             var hotels = _hotelRepository.GetAll();
-            return hotels.Where(h => h.Id == hotelId).SelectMany(h => h.Rooms).Where(r => r.RoomType == roomType).Count();
+            return hotels.Where(h => h.Id.Equals(hotelId, StringComparison.OrdinalIgnoreCase)).SelectMany(h => h.Rooms).Where(r => r.RoomType.Equals(roomType, StringComparison.OrdinalIgnoreCase)).Count();
         }
     }
 }

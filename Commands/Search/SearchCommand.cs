@@ -11,17 +11,17 @@ namespace Commands.Search
 
         public void Execute(string[] args)
         {
-            if (args.Length == 3)
+            if (args.Length == 3 && int.TryParse(args[1], out var days))
             {
-                var hotelId = args[0];
-                var days = int.Parse(args[1]);
-                var roomType = args[2];
+                var hotelId = args[0].ToLower();
+                var roomType = args[2].ToLower();
 
-                var availabilityCount = _availabilityService.GetRoomAvailabilityForFollowingDays(hotelId, days, roomType);
+                var availabilityRanges = _availabilityService.GetRoomAvailabilityForFollowingDays(hotelId, days, roomType);
 
                 var dateFormat = _configuration.GetRequiredSection("dateFormat").Value;
-                Console.WriteLine(availabilityCount.ToOutputString(dateFormat));
-            } else
+                Console.WriteLine(availabilityRanges.ToOutputString(dateFormat));
+            }
+            else
             {
                 Console.WriteLine("Invalid parameters provided.");
             }

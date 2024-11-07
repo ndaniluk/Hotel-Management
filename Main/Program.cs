@@ -6,17 +6,22 @@ using Microsoft.Extensions.DependencyInjection;
 var configuration = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
     .AddCommandLine(args)
-    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     .Build();
 
-string hotelsFile = configuration["hotels"];
-string bookingsFile = configuration["bookings"];
-
-if (string.IsNullOrEmpty(hotelsFile) || string.IsNullOrEmpty(bookingsFile))
+if (string.IsNullOrEmpty(configuration["hotels"]))
 {
-    Console.WriteLine("Error: Missing data files for hotels or bookings.");
-    return;
-}   
+    configuration["hotels"] = "hotels.json";
+}
+
+if (string.IsNullOrEmpty(configuration["bookings"]))
+{
+    configuration["bookings"] = "bookings.json";
+}
+
+if (string.IsNullOrEmpty(configuration["dateFormat"]))
+{
+    configuration["dateFormat"] = "yyyyMMdd";
+}
 
 var serviceProvider = new ServiceCollection()
     .AddServices()
