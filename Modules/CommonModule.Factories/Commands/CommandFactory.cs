@@ -16,7 +16,7 @@ namespace CommonModule.Factories.Commands
             {
                 "availability" => _serviceProvider.GetRequiredService<AvailabilityCommand>(),
                 "search" => _serviceProvider.GetRequiredService<SearchCommand>(),
-                _ => throw new ArgumentException("Invalid command name")
+                _ => throw new ArgumentException("Couldn't recognize command name.")
             };
         }
     }

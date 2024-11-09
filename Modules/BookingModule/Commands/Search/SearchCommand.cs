@@ -14,8 +14,8 @@ namespace BookingModule.Commands.Search
         {
             if (args.Length == 3 && int.TryParse(args[1], out var days))
             {
-                var hotelId = args[0].ToLower();
-                var roomType = args[2].ToLower();
+                var hotelId = args[0];
+                var roomType = args[2];
 
                 var availabilityRanges = _availabilityService.GetRoomAvailabilityForFollowingDays(hotelId, days, roomType);
 

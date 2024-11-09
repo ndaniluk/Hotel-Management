@@ -6,7 +6,7 @@ namespace BookingModule.Helpers.Converters
     {
         public static string ToOutputString(this IEnumerable<AvailabilityRange> availabilityRanges, string dateFormat)
         {
-            if (availabilityRanges == null || availabilityRanges.Count() == 0)
+            if (availabilityRanges == null || !availabilityRanges.Any())
             {
                 return string.Empty;
             }

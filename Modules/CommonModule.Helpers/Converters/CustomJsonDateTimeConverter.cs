@@ -20,7 +20,7 @@ namespace CommonModule.Helpers.Converters
                 return date;
             }
 
-            throw new JsonException($"Invalid date format. Expected format: {_dateFormat}");
+            throw new JsonException($"Invalid date format. Expected format: {_dateFormat}.");
         }
 
         public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
