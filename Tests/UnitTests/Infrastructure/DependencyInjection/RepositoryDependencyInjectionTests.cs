@@ -1,8 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Repositories.Bookings;
-using Repositories.Hotels;
-using Main.Extensions;
 using Microsoft.Extensions.Configuration;
+using BookingModule.Repositories.Bookings;
+using BookingModule.Repositories.Hotels;
+using BookingModule;
+using CommonModule;
 
 namespace UnitTests.Infrastructure.DependencyInjection
 {
@@ -18,8 +19,8 @@ namespace UnitTests.Infrastructure.DependencyInjection
             var serviceCollection = new ServiceCollection();
             serviceCollection
                 .AddSingleton<IConfiguration>(configuration)
-                .AddHelpers()
-                .AddRepositories();
+                .AddBookingModule()
+                .AddCommonModules();
             _serviceProvider = serviceCollection.BuildServiceProvider();
         }
 

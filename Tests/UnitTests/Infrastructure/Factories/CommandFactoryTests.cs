@@ -1,9 +1,10 @@
-﻿using Commands.Availability;
-using Factories.Commands;
-using Commands.Search;
-using Main.Extensions;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
+using CommonModule.Factories.Commands;
+using BookingModule;
+using CommonModule;
+using BookingModule.Commands.Search;
+using BookingModule.Commands.Availability;
 
 namespace UnitTests.Infrastructure.Factories
 {
@@ -19,10 +20,8 @@ namespace UnitTests.Infrastructure.Factories
             var serviceCollection = new ServiceCollection();
             serviceCollection
                 .AddSingleton<IConfiguration>(configuration)
-                .AddServices()
-                .AddCommands()
-                .AddRepositories()
-                .AddHelpers();
+                .AddBookingModule()
+                .AddCommonModules();
             var serviceProvider = serviceCollection.BuildServiceProvider();
             _commandFactory = serviceProvider.GetRequiredService<ICommandFactory>();
         }

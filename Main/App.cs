@@ -1,18 +1,12 @@
-﻿using Factories.Commands;
+﻿using CommonModule.Factories.Commands;
 using Microsoft.Extensions.Configuration;
 
 namespace Main
 {
-    internal class App
+    public class App(ICommandInvoker commandInvoker, IConfiguration configuration)
     {
-        private readonly ICommandInvoker _commandInvoker;
-        private readonly IConfiguration _configuration;
-
-        public App(ICommandInvoker commandInvoker, IConfiguration configuration)
-        {
-            _commandInvoker = commandInvoker;
-            _configuration = configuration;
-        }
+        private readonly ICommandInvoker _commandInvoker = commandInvoker;
+        private readonly IConfiguration _configuration = configuration;
 
         internal void Start()
         {

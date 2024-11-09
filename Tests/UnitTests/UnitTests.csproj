@@ -16,9 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Commands\Commands.csproj" />
-    <ProjectReference Include="..\..\Core\Repositories\Repositories.csproj" />
-    <ProjectReference Include="..\..\Helpers\Helpers.csproj" />
     <ProjectReference Include="..\..\Main\Main.csproj" />
   </ItemGroup>
 

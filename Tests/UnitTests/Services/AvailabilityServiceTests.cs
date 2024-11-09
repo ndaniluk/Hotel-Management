@@ -1,10 +1,10 @@
-﻿using Helpers.FileOperations;
-using Main.Extensions;
+﻿using BookingModule.Helpers.DependencyInjection.Extensions;
+using BookingModule.Services.Availability;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Models;
-using Services.Availability;
-using UnitTests.Mocks;
+using BookingModule;
+using CommonModule;
+using BookingModule.Models;
 
 namespace UnitTests.Services
 {
@@ -31,9 +31,8 @@ namespace UnitTests.Services
             var serviceCollection = new ServiceCollection();
             serviceCollection
                 .AddSingleton<IConfiguration>(configuration)
-                .AddSingleton<IFileReader>(new MockFileReader(dataDirectory))
-                .AddServices()
-                .AddRepositories();
+                .AddBookingModule()
+                .AddCommonModules();
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
             _availabilityService = serviceProvider.GetRequiredService<IAvailabilityService>();

@@ -16,10 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Commands\Commands.csproj" />
-    <ProjectReference Include="..\Core\Repositories\Repositories.csproj" />
-    <ProjectReference Include="..\Core\Services\Services.csproj" />
-    <ProjectReference Include="..\Factories\Factories.csproj" />
+    <ProjectReference Include="..\BookingModule\BookingModule.csproj" />
+    <ProjectReference Include="..\CommonModule\CommonModule.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,6 +1,7 @@
-﻿using Commands.Availability;
-using Commands.Search;
-using Main.Extensions;
+﻿using BookingModule;
+using BookingModule.Commands.Availability;
+using BookingModule.Commands.Search;
+using CommonModule;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,10 +19,8 @@ namespace UnitTests.Infrastructure.DependencyInjection
             var serviceCollection = new ServiceCollection();
             serviceCollection
                 .AddSingleton<IConfiguration>(configuration)
-                .AddServices()
-                .AddRepositories()
-                .AddHelpers()
-                .AddCommands();
+                .AddBookingModule()
+                .AddCommonModules();
             _serviceProvider = serviceCollection.BuildServiceProvider();
         }
 
