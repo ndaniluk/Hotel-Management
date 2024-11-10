@@ -2,7 +2,14 @@
 
 This application allows you o manage hotel room availability and reservations. It reads from files containing hotel data and booking data, then allows a user to check room availability for a specified hotel, date range, and room type.
 
-## Example Command to Run the Program:
+## Commands to build & run
+```bash
+dotnet build
+cd .\Main\
+dotnet run
+```
+
+## Example Command to Run the executable:
 
 ```bash
 ./hotel --hotels hotels.json --bookings bookings.json
