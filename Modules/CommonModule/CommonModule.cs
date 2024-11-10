@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using CommonModule.Factories;
 using CommonModule.DataProviders;
-using CommonModule.Helpers;
 
 namespace CommonModule
 {

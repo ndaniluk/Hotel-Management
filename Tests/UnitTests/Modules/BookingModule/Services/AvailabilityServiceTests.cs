@@ -1,5 +1,4 @@
-﻿using BookingModule.Helpers.DependencyInjection.Extensions;
-using BookingModule.Services.Availability;
+﻿using BookingModule.Services.Availability;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using BookingModule;

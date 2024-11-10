@@ -4,6 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <BaseOutputPath>Modules\BookingModule\bin</BaseOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,8 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\CommonModule.DataProviders\CommonModule.DataProviders.csproj" />
+    <ProjectReference Include="..\CommonModule.DataProviders\CommonModule.DataProviders.csproj" />
     <ProjectReference Include="..\CommonModule.Commands\CommonModule.Commands.csproj" />
+    <ProjectReference Include="..\CommonModule.DataProviders\CommonModule.DataProviders.csproj" />
     <ProjectReference Include="..\CommonModule.Helpers\CommonModule.Helpers.csproj" />
     <ProjectReference Include="..\CommonModule.Repositories\CommonModule.Repositories.csproj" />
   </ItemGroup>

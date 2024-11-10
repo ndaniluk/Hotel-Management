@@ -16,8 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BookingModule\BookingModule.csproj" />
-    <ProjectReference Include="..\CommonModule\CommonModule.csproj" />
     <ProjectReference Include="..\Modules\BookingModule\BookingModule.csproj" />
     <ProjectReference Include="..\Modules\CommonModule\CommonModule.csproj" />
   </ItemGroup>

@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonModule", "Modules\Com
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{4574AB7B-B06E-4AE5-AB61-6C377F88CB43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonModule.DataProviders", "CommonModule.DataProviders\CommonModule.DataProviders.csproj", "{582C0616-62DD-4E00-805C-E951F082DA9E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonModule.DataProviders", "Modules\CommonModule.DataProviders\CommonModule.DataProviders.csproj", "{582C0616-62DD-4E00-805C-E951F082DA9E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

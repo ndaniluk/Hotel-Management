@@ -4,6 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <BaseOutputPath>Modules\CommonModule.Repositories\bin</BaseOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\CommonModule.DataProviders\CommonModule.DataProviders.csproj" />
+    <ProjectReference Include="..\CommonModule.DataProviders\CommonModule.DataProviders.csproj" />
     <ProjectReference Include="..\CommonModule.Helpers\CommonModule.Helpers.csproj" />
   </ItemGroup>
 
