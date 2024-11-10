@@ -1,4 +1,4 @@
-﻿using CommonModule.Factories.Helpers.DependencyInjection;
+﻿using CommonModule.Factories.Helpers.DependencyInjection.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CommonModule.Factories

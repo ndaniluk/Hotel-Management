@@ -8,7 +8,7 @@ namespace BookingModule.Helpers.DependencyInjection.Extensions
         public static IServiceCollection AddServices(this IServiceCollection serviceCollection)
         {
             return serviceCollection
-                .AddScoped<IAvailabilityService, AvailabilityService>();
+                .AddTransient<IAvailabilityService, AvailabilityService>();
         }
     }
 }

@@ -22,7 +22,9 @@ namespace BookingModule.Services.Availability
 
         public IEnumerable<AvailabilityRange> GetRoomAvailabilityForFollowingDays(string hotelId, int days, string roomType, DateTime startDate = default)
         {
-            var roomsCount = GetRoomsCount(hotelId, roomType);
+            var hotels = _hotelRepository.GetAll();
+
+            var roomsCount = GetRoomsCount(hotels, hotelId, roomType);
             if (roomsCount == 0)
             {
                 return [];
@@ -65,7 +67,9 @@ namespace BookingModule.Services.Availability
 
         private int GetRoomAvailabilityForSpecifiedDateRange(string hotelId, string roomType, string dateFrom, string? dateTo = null)
         {
-            var roomsCount = GetRoomsCount(hotelId, roomType);
+            var hotels = _hotelRepository.GetAll();
+
+            var roomsCount = GetRoomsCount(hotels, hotelId, roomType);
             if (roomsCount == 0)
             {
                 return 0;
@@ -115,9 +119,8 @@ namespace BookingModule.Services.Availability
             return DateTime.ParseExact(date, dateFormat, CultureInfo.InvariantCulture);
         }
 
-        private int GetRoomsCount(string hotelId, string roomType)
+        private int GetRoomsCount(IEnumerable<Hotel> hotels, string hotelId, string roomType)
         {
-            var hotels = _hotelRepository.GetAll();
             return hotels.Where(h => h.Id.Equals(hotelId, StringComparison.OrdinalIgnoreCase)).SelectMany(h => h.Rooms).Where(r => r.RoomType.Equals(roomType, StringComparison.OrdinalIgnoreCase)).Count();
         }
     }

@@ -6,7 +6,7 @@ using CommonModule;
 using BookingModule.Commands.Search;
 using BookingModule.Commands.Availability;
 
-namespace UnitTests.Infrastructure.Factories
+namespace UnitTests.Modules.CommonModule.Factories
 {
     [TestClass]
     public class CommandFactoryTests

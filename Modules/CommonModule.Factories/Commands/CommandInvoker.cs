@@ -10,7 +10,7 @@ namespace CommonModule.Factories.Commands
         {
             try
             {
-                var extractedInput = CommandValidator.ExtractCommand(input);
+                var extractedInput = CommandExtractor.Extract(input);
                 var command = _commandFactory.CreateCommand(extractedInput.Item1);
                 command.Execute(extractedInput.Item2);
             }
@@ -18,13 +18,13 @@ namespace CommonModule.Factories.Commands
             {
                 Console.WriteLine($"Invalid input. {e.Message}");
             }
-            catch (InvalidOperationException)
+            catch (InvalidOperationException e)
             {
-                Console.WriteLine($"Command is recognized but is not properly configured.");
+                Console.WriteLine($"Command is recognized but is not properly configured. {e.Message}");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"An unexpected error occurred: {ex.Message}");
+                Console.WriteLine($"An unexpected error occurred. {ex.Message}");
             }
         }
     }

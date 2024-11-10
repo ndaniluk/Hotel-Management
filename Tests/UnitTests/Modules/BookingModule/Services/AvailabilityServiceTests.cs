@@ -6,7 +6,7 @@ using BookingModule;
 using CommonModule;
 using BookingModule.Models;
 
-namespace UnitTests.Services
+namespace UnitTests.Modules.BookingModule.Services
 {
     [TestClass]
     public class AvailabilityServiceTests
@@ -16,17 +16,18 @@ namespace UnitTests.Services
         [TestInitialize]
         public void InitializeTests()
         {
-            var inMemorySettings = new Dictionary<string, string?>
-        {
-            { "hotels", "hotels.json" },
-            { "bookings", "bookings.json" },
-            { "dateFormat", "yyyyMMdd" }
-        };
+            var dataDirectory = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\TestData");
+
+            var inMemorySettings = new Dictionary<string, string>
+            {
+                { "hotels", Path.Combine(dataDirectory, "hotels.json") },
+                { "bookings", Path.Combine(dataDirectory, "bookings.json") },
+                { "dateFormat", "yyyyMMdd" }
+            };
+
             var configuration = new ConfigurationBuilder()
                 .AddInMemoryCollection(inMemorySettings)
                 .Build();
-
-            var dataDirectory = Path.Combine(Directory.GetCurrentDirectory(), "TestData");
 
             var serviceCollection = new ServiceCollection();
             serviceCollection

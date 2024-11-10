@@ -4,7 +4,7 @@ using BookingModule.Services.Availability;
 using BookingModule;
 using CommonModule;
 
-namespace UnitTests.Infrastructure.DependencyInjection
+namespace UnitTests.Modules.BookingModule.Helpers.DependencyInjection.Extensions
 {
     [TestClass]
     public class ServiceDependencyInjectionTests

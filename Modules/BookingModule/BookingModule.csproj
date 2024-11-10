@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\CommonModule.DataProviders\CommonModule.DataProviders.csproj" />
     <ProjectReference Include="..\CommonModule.Commands\CommonModule.Commands.csproj" />
     <ProjectReference Include="..\CommonModule.Helpers\CommonModule.Helpers.csproj" />
     <ProjectReference Include="..\CommonModule.Repositories\CommonModule.Repositories.csproj" />

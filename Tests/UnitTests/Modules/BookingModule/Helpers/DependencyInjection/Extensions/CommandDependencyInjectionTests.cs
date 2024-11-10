@@ -5,7 +5,7 @@ using CommonModule;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace UnitTests.Infrastructure.DependencyInjection
+namespace UnitTests.Modules.BookingModule.Helpers.DependencyInjection.Extensions
 {
     [TestClass]
     public class CommandDependencyInjectionTests

@@ -8,11 +8,11 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\CommonModule.DataProviders\CommonModule.DataProviders.csproj" />
-    <ProjectReference Include="..\CommonModule.Factories\CommonModule.Factories.csproj" />
+    <ProjectReference Include="..\Modules\CommonModule.Helpers\CommonModule.Helpers.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,11 +1,10 @@
 ﻿using BookingModule.Models;
-using CommonModule.Helpers.FileOperations;
+using CommonModule.DataProviders.Json;
 using CommonModule.Repositories;
-using Microsoft.Extensions.Configuration;
 
 namespace BookingModule.Repositories.Hotels
 {
-    public class HotelRepository(IConfiguration configuration) : BaseRepository<Hotel>(configuration), IHotelRepository
+    public class HotelRepository(IJsonDataProvider jsonDataProvider) : BaseRepository<Hotel>(jsonDataProvider), IHotelRepository
     {
     }
 }

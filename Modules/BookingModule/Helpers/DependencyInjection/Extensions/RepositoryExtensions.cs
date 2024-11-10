@@ -9,8 +9,8 @@ namespace BookingModule.Helpers.DependencyInjection.Extensions
         public static IServiceCollection AddRepositories(this IServiceCollection serviceCollection)
         {
             return serviceCollection
-                .AddScoped<IBookingRepository, BookingRepository>()
-                .AddScoped<IHotelRepository, HotelRepository>();
+                .AddTransient<IBookingRepository, BookingRepository>()
+                .AddTransient<IHotelRepository, HotelRepository>();
         }
     }
 }
