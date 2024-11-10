@@ -19,7 +19,14 @@ namespace CommonModule.Factories.Helpers
             }
 
             var argsPart = input.Substring(braceIndex + 1, input.Length - braceIndex - 2).Trim();
-            var args = argsPart.Length > 0 ? argsPart.Split(", ") : [];
+            var args = argsPart.Length > 0 ?
+                argsPart
+                .Split(
+                    new[] { ", ", "," },
+                    StringSplitOptions.RemoveEmptyEntries)
+                .Select(arg => arg.Trim())
+                .ToArray() :
+                [];
 
             return (commandName, args);
         }
