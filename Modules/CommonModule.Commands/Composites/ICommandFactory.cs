@@ -1,9 +1,8 @@
-﻿using CommonModule.Commands;
-
-namespace CommonModule.Factories.Commands
+﻿namespace CommonModule.Commands.Composites
 {
     public interface ICommandFactory
     {
+        bool CanHandle(string commandName);
         ICommand CreateCommand(string commandName);
     }
 }

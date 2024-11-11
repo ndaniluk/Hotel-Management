@@ -1,5 +1,6 @@
 ﻿using BookingModule.Commands.Availability;
 using BookingModule.Commands.Search;
+using CommonModule.Commands.Composites;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BookingModule.Helpers.DependencyInjection.Extensions
@@ -9,8 +10,10 @@ namespace BookingModule.Helpers.DependencyInjection.Extensions
         public static IServiceCollection AddCommands(this IServiceCollection serviceCollection)
         {
             return serviceCollection
-                .AddTransient<AvailabilityCommand>()
-                .AddTransient<SearchCommand>();
+                .AddSingleton<ICommandFactory, AvailabilityCommandFactory>()
+                .AddSingleton<ICommandFactory, SearchCommandFactory>()
+                .AddTransient<IAvailabilityCommand, AvailabilityCommand>()
+                .AddTransient<ISearchCommand, SearchCommand>();
         }
     }
 }

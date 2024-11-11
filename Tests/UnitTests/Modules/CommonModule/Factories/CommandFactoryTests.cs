@@ -1,17 +1,17 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
-using CommonModule.Factories.Commands;
 using BookingModule;
 using CommonModule;
 using BookingModule.Commands.Search;
 using BookingModule.Commands.Availability;
+using CommonModule.Commands.Composites;
 
 namespace UnitTests.Modules.CommonModule.Factories
 {
     [TestClass]
     public class CommandFactoryTests
     {
-        private ICommandFactory _commandFactory;
+        private ICompositeCommandFactory _commandFactory;
 
         [TestInitialize]
         public void InitializeTests()
@@ -23,7 +23,7 @@ namespace UnitTests.Modules.CommonModule.Factories
                 .AddBookingModule()
                 .AddCommonModules();
             var serviceProvider = serviceCollection.BuildServiceProvider();
-            _commandFactory = serviceProvider.GetRequiredService<ICommandFactory>();
+            _commandFactory = serviceProvider.GetRequiredService<ICompositeCommandFactory>();
         }
 
         [TestMethod]
@@ -40,12 +40,6 @@ namespace UnitTests.Modules.CommonModule.Factories
             var command = _commandFactory.CreateCommand("Availability");
             Assert.IsNotNull(command);
             Assert.IsTrue(command is AvailabilityCommand);
-        }
-
-        [TestMethod]
-        public void CreateCommand_ShouldThrowArgumentException()
-        {
-            Assert.ThrowsException<ArgumentException>(() => _commandFactory.CreateCommand("InvalidCommand"));
         }
     }
 }

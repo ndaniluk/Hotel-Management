@@ -1,4 +1,4 @@
-﻿namespace CommonModule.Commands
+﻿namespace CommonModule.Commands.Composites
 {
     public interface ICommand
     {

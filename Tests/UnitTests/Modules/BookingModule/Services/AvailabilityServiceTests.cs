@@ -57,7 +57,7 @@ namespace UnitTests.Modules.BookingModule.Services
                 var hotelId = inputs[i][0];
                 var date = inputs[i][1];
                 var roomType = inputs[i][2];
-                results[i] = _availabilityService.GetRoomAvailabilityForSpecifiedDateRange(hotelId, date, roomType);
+                results[i] = _availabilityService.GetRoomAvailabilityForSpecifiedDateRange(hotelId, DateTime.ParseExact(date, "yyyyMMdd", null), null, roomType);
             }
 
             Assert.AreEqual(2, results[0]);
@@ -86,8 +86,9 @@ namespace UnitTests.Modules.BookingModule.Services
             {
                 var hotelId = inputs[i][0];
                 var dates = inputs[i][1];
+                var datesRange = dates.Split('-');
                 var roomType = inputs[i][2];
-                results[i] = _availabilityService.GetRoomAvailabilityForSpecifiedDateRange(hotelId, dates, roomType);
+                results[i] = _availabilityService.GetRoomAvailabilityForSpecifiedDateRange(hotelId, DateTime.ParseExact(datesRange[0], "yyyyMMdd", null), DateTime.ParseExact(datesRange[1], "yyyyMMdd", null), roomType);
             }
 
             Assert.AreEqual(1, results[0]);

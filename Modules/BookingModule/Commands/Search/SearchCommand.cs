@@ -1,11 +1,10 @@
 ﻿using BookingModule.Helpers.Converters;
 using BookingModule.Services.Availability;
-using CommonModule.Commands;
 using Microsoft.Extensions.Configuration;
 
 namespace BookingModule.Commands.Search
 {
-    public class SearchCommand(IAvailabilityService availabilityService, IConfiguration configuration) : ICommand
+    public class SearchCommand(IConfiguration configuration, IAvailabilityService availabilityService) : ISearchCommand
     {
         private readonly IAvailabilityService _availabilityService = availabilityService;
         private readonly IConfiguration _configuration = configuration;

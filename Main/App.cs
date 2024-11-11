@@ -1,12 +1,11 @@
-﻿using CommonModule.Factories.Commands;
-using Microsoft.Extensions.Configuration;
+﻿
+using CommonModule.Commands.Composites;
 
 namespace Main
 {
-    public class App(ICommandInvoker commandInvoker, IConfiguration configuration)
+    public class App(ICommandInvoker commandInvoker)
     {
         private readonly ICommandInvoker _commandInvoker = commandInvoker;
-        private readonly IConfiguration _configuration = configuration;
 
         internal void Start()
         {

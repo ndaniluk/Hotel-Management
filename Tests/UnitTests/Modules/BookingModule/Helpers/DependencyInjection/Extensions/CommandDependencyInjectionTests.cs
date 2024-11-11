@@ -27,7 +27,7 @@ namespace UnitTests.Modules.BookingModule.Helpers.DependencyInjection.Extensions
         [TestMethod]
         public void AddCommands_ShouldRegisterAvailabilityCommand()
         {
-            var command = _serviceProvider.GetService<AvailabilityCommand>();
+            var command = _serviceProvider.GetService<IAvailabilityCommand>();
             Assert.IsNotNull(command);
             Assert.IsTrue(command is AvailabilityCommand);
         }
@@ -35,7 +35,7 @@ namespace UnitTests.Modules.BookingModule.Helpers.DependencyInjection.Extensions
         [TestMethod]
         public void AddCommands_ShouldRegisterSearchCommand()
         {
-            var command = _serviceProvider.GetService<SearchCommand>();
+            var command = _serviceProvider.GetService<ISearchCommand>();
             Assert.IsNotNull(command);
             Assert.IsTrue(command is SearchCommand);
         }

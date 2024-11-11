@@ -1,5 +1,5 @@
-﻿using CommonModule.Factories;
-using CommonModule.Factories.Commands;
+﻿using CommonModule.Commands;
+using CommonModule.Commands.Composites;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,7 +17,7 @@ namespace UnitTests.Modules.CommonModule.Factories.Helpers.DependencyInjection.E
             var serviceCollection = new ServiceCollection();
             serviceCollection
                 .AddSingleton<IConfiguration>(configuration)
-                .AddCommonModuleFactories();
+                .AddCommonModuleCommands();
             _serviceProvider = serviceCollection.BuildServiceProvider();
         }
 
@@ -26,15 +26,15 @@ namespace UnitTests.Modules.CommonModule.Factories.Helpers.DependencyInjection.E
         {
             var service = _serviceProvider.GetService<ICommandInvoker>();
             Assert.IsNotNull(service);
-            Assert.IsTrue(service is ICommandInvoker);
+            Assert.IsTrue(service is CommandInvoker);
         }
 
         [TestMethod]
         public void AddServices_ShouldRegisterCommandFactory()
         {
-            var service = _serviceProvider.GetService<ICommandFactory>();
+            var service = _serviceProvider.GetService<ICompositeCommandFactory>();
             Assert.IsNotNull(service);
-            Assert.IsTrue(service is ICommandFactory);
+            Assert.IsTrue(service is CompositeCommandFactory);
         }
     }
 }

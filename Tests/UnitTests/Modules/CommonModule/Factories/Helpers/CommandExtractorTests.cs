@@ -1,4 +1,5 @@
-﻿using CommonModule.Factories.Helpers;
+﻿
+using CommonModule.Commands.Helpers;
 
 namespace UnitTests.Modules.CommonModule.Factories.Helpers
 {

@@ -12,14 +12,6 @@ namespace BookingModule.Services.Availability
         private readonly IBookingRepository _bookingRepository = bookingRepository;
         private readonly IHotelRepository _hotelRepository = hotelRepository;
 
-        public int GetRoomAvailabilityForSpecifiedDateRange(string hotelId, string dates, string roomType)
-        {
-            var datesRange = dates.Split('-');
-            var dateFrom = datesRange[0];
-            var dateTo = datesRange.Length > 1 ? datesRange[1] : null;
-            return GetRoomAvailabilityForSpecifiedDateRange(hotelId, roomType, dateFrom, dateTo);
-        }
-
         public IEnumerable<AvailabilityRange> GetRoomAvailabilityForFollowingDays(string hotelId, int days, string roomType, DateTime startDate = default)
         {
             var hotels = _hotelRepository.GetAll();
@@ -65,7 +57,7 @@ namespace BookingModule.Services.Availability
             return availabilityRanges;
         }
 
-        private int GetRoomAvailabilityForSpecifiedDateRange(string hotelId, string roomType, string dateFrom, string? dateTo = null)
+        public int GetRoomAvailabilityForSpecifiedDateRange(string hotelId, DateTime dateFrom, DateTime? dateTo, string roomType)
         {
             var hotels = _hotelRepository.GetAll();
 
@@ -75,27 +67,10 @@ namespace BookingModule.Services.Availability
                 return 0;
             }
 
-            DateTime parsedDateFrom;
-            DateTime? parsedDateTo = null;
-
-            try
-            {
-                parsedDateFrom = GetDate(dateFrom);
-                if (dateTo != null)
-                {
-                    parsedDateTo = GetDate(dateTo);
-                }
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Invalid date format.");
-                return 0;
-            }
-
             var bookings = _bookingRepository.GetAll();
 
             var bookingsForDate = bookings
-                .Where(b => b.HotelId.Equals(hotelId, StringComparison.OrdinalIgnoreCase) && b.RoomType.Equals(roomType, StringComparison.OrdinalIgnoreCase) && IsBookingOverlapping(b, parsedDateFrom, parsedDateTo))
+                .Where(b => b.HotelId.Equals(hotelId, StringComparison.OrdinalIgnoreCase) && b.RoomType.Equals(roomType, StringComparison.OrdinalIgnoreCase) && IsBookingOverlapping(b, dateFrom, dateTo))
                 .Count();
 
             return roomsCount - bookingsForDate;
@@ -111,12 +86,6 @@ namespace BookingModule.Services.Availability
             return (booking.Arrival <= dateFrom && booking.Departure >= dateFrom) ||
                    (booking.Arrival <= dateTo && booking.Departure >= dateTo) ||
                    (booking.Arrival >= dateFrom && booking.Departure <= dateTo);
-        }
-
-        private DateTime GetDate(string date)
-        {
-            var dateFormat = _configuration.GetRequiredSection("dateFormat").Value ?? "";
-            return DateTime.ParseExact(date, dateFormat, CultureInfo.InvariantCulture);
         }
 
         private int GetRoomsCount(IEnumerable<Hotel> hotels, string hotelId, string roomType)

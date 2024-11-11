@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using CommonModule.Factories;
+using CommonModule.Commands;
 using CommonModule.DataProviders;
 
 namespace CommonModule
@@ -9,7 +9,7 @@ namespace CommonModule
         public static IServiceCollection AddCommonModules(this IServiceCollection servicesCollection)
         {
             return servicesCollection
-                .AddCommonModuleFactories()
+                .AddCommonModuleCommands()
                 .AddCommonModuleDataProviders();
         }
     }

@@ -11,8 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CommonModule.Commands\CommonModule.Commands.csproj" />
     <ProjectReference Include="..\CommonModule.DataProviders\CommonModule.DataProviders.csproj" />
-    <ProjectReference Include="..\CommonModule.Factories\CommonModule.Factories.csproj" />
   </ItemGroup>
 
 </Project>
