@@ -10,8 +10,8 @@ namespace BookingModule.Helpers.DependencyInjection.Extensions
         public static IServiceCollection AddCommands(this IServiceCollection serviceCollection)
         {
             return serviceCollection
-                .AddSingleton<ICommandFactory, AvailabilityCommandFactory>()
-                .AddSingleton<ICommandFactory, SearchCommandFactory>()
+                .AddTransient<ICommandFactory, AvailabilityCommandFactory>()
+                .AddTransient<ICommandFactory, SearchCommandFactory>()
                 .AddTransient<IAvailabilityCommand, AvailabilityCommand>()
                 .AddTransient<ISearchCommand, SearchCommand>();
         }

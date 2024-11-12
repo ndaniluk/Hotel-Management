@@ -8,8 +8,8 @@ namespace CommonModule.Commands.Helpers.DependencyInjection.Extensions
         public static IServiceCollection AddCommands(this IServiceCollection serviceCollection)
         {
             return serviceCollection
-                .AddSingleton<ICompositeCommandFactory, CompositeCommandFactory>()
-                .AddSingleton<ICommandInvoker, CommandInvoker>();
+                .AddTransient<ICompositeCommandFactory, CompositeCommandFactory>()
+                .AddTransient<ICommandInvoker, CommandInvoker>();
         }
     }
 }
